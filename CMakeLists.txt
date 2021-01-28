@@ -3,16 +3,16 @@ cmake_minimum_required(VERSION 3.0)
 #project name  
 project(HELLOWORLD)
 #add compile options
-add_compile_options("--std=c++11")
+set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
 #set CMAKE_BUILD_TYPE
 set( CMAKE_BUILD_TYPE Debug )
 # set output binary path  
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
 ############################################################
 # Create a library
 ############################################################
 #Generate the static library from the library sources
-add_library( solution_lib STATIC src/solution.cpp )
+add_library( solution_lib SHARED src/solution.cpp )
 target_include_directories( solution_lib PUBLIC ${PROJECT_SOURCE_DIR}/include )
 ############################################################
 # Create an executable

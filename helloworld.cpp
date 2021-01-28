@@ -9,6 +9,6 @@
 using namespace std;
 
 int main(){
-    string Tem;
-    printNumbers1(2,Tem);
+    string temporary;
+    printNumbers1(2,temporary );
 }

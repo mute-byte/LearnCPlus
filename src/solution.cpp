@@ -99,7 +99,7 @@
             {8,{{' ', 8}}}                             //8. end with 'blank'
         };
         int state = 0;
-        for (int i = 0; i < s.length(); i++)
+        for (unsigned int i = 0; i < s.length(); i++)
         {
             char t;
             if('0' <= s[i] && s[i]<= '9')
