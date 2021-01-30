@@ -154,4 +154,39 @@
         }
         return Res;    
     }
+    bool recure(TreeNode* A, TreeNode* B)
+    {
+        if (B == nullptr)
+        {
+            return true;
+        }
+        if (A == nullptr)
+        {
+            return false;
+        }
+        else
+        {
+            return A->val == B->val && recure(A->left, B->left) && recure(A->right, B->right);
+        }    
+    }
+    bool isSubStructure(TreeNode* A, TreeNode* B) {
+        if (A == nullptr || B == nullptr)
+        {
+            return true;
+        }
+        return recure(A, B) || isSubStructure(A->left, B) || isSubStructure(A->right, B);
+    }
+    TreeNode* mirrorTree(TreeNode* root) {
+        if (root == nullptr)
+        {
+            return nullptr;
+        }
+        else
+        {
+            TreeNode* Tem = root->left;
+            root->left = mirrorTree(root->right);
+            root->right = mirrorTree(Tem);
+        }
+        return root;    
+    }
      
