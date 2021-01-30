@@ -189,4 +189,54 @@
         }
         return root;    
     }
-     
+
+void PublicPrefix(string& Pattern, vector<int>& Next)
+{
+    Next[0] = 0;
+    int i = 1;
+    int len = 0;//始终指向i之前部分的最长公共前后缀的长度
+    while (i < Pattern.size())
+    {
+        if (Pattern[i] == Pattern[len])
+        {
+            len++;
+            Next[i] = len;
+            i++;
+        }
+        else
+        {//len始终指向不匹配前最长公共前后缀的长度
+            if (len == 0)
+            {
+                Next[i] = len;
+                i++;
+            }
+            len = Pattern[len-1];
+        }   
+    }
+}
+int KmpSearch(string& Original, string& Pattern, vector<int>& Next)
+{
+    int i = 0;
+    int j = 0;
+    while (i<Original.size())
+    {
+        if (j == Pattern.size())
+        {
+            return i - j;
+        }
+        if (Original[i] == Pattern[j])
+        {
+            i++,j++;
+        }
+        else
+        {
+            j = Next[j];
+            if (j == -1)
+            {
+                i++;
+                j++;
+            }
+       }    
+    }
+    return -1;   
+}

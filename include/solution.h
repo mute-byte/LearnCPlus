@@ -24,3 +24,5 @@ vector<int> exchange(vector<int>& nums);
 bool recure(TreeNode* A, TreeNode* B);
 bool isSubStructure(TreeNode* A, TreeNode* B);
 TreeNode* mirrorTree(TreeNode* root);
+void PublicPrefix(string& Pattern, vector<int>& Next);
+int KmpSearch(string& Original, string& Pattern, vector<int>& Next);
