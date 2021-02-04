@@ -26,3 +26,7 @@ bool isSubStructure(TreeNode* A, TreeNode* B);
 TreeNode* mirrorTree(TreeNode* root);
 void PublicPrefix(string& Pattern, vector<int>& Next);
 int KmpSearch(string& Original, string& Pattern, vector<int>& Next);
+void DirectInsertionSort(vector<int> &original);
+void SelectSort(vector<int> &original);
+void BubbleSort(vector<int>& original);
+int Prim(vector<vector<int>>& Graph, int v0);

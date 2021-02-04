@@ -240,3 +240,132 @@ int KmpSearch(string& Original, string& Pattern, vector<int>& Next)
     }
     return -1;   
 }
+void DirectInsertionSort(vector<int> &original)
+{
+    for (int i = 1; i < original.size(); i++)
+    {
+        int tem = original[i];
+        int j = i;
+        for (; j > 0 ; j--)
+        {
+            if (tem < original[j-1])
+            {
+                original[j] = original[j-1];
+            }
+            else
+            {
+                break;
+            }    
+        }
+        original[j] = tem;    
+    }
+    
+}
+void SelectSort(vector<int> &original)
+{
+    for (int i = 0; i < original.size(); i++)
+    {
+        int k=i;
+        for (int j = i+1; j < original.size(); j++)
+        {
+            if (original[j] < original[k] )
+            {
+                k = j;
+            }    
+        }
+        swap(original[k], original[i]);    
+    }
+    
+}
+void BubbleSort(vector<int>& original)
+{
+     for (int i = original.size() - 1; i >= 0; i--)
+     {
+         bool flag = false;
+         for (int j = 0; j < i; j++)
+         {
+             if (original[j]>original[j+1])
+             {
+                 swap(original[j], original[j+1]);
+                 flag = true;
+             }    
+         }
+         if (flag == false)
+         {
+             break;
+         }
+         
+     }
+     
+}
+#if 0
+    vector<int> test{5,4,6,2,1,2};
+    BubbleSort(test);
+    for (auto i : test)
+    {
+        cout<<i<<endl;
+    }
+#endif	
+    #if 0
+    vector<vector<int>> Graph{{INT32_MAX,1,2,3,INT32_MAX,INT32_MAX},
+                              {1,INT32_MAX,7,INT32_MAX,8,INT32_MAX},
+                              {2,7,INT32_MAX,6,4,INT32_MAX},
+                              {3,INT32_MAX,6,INT32_MAX,INT32_MAX,5},
+                              {INT32_MAX,8,4,INT32_MAX,INT32_MAX,9},
+                              {INT32_MAX,INT32_MAX,INT32_MAX,5,9,INT32_MAX}};
+
+    cout<<Prim(Graph,0)<<endl;
+    #endif
+int Prim(vector<vector<int>>& Graph, int v0)
+{
+    vector<int> Cost(Graph.size(),0);
+    vector<bool> Visist(Graph.size(),false);
+    int v,min,sum;
+    for (int i = 0; i < Graph.size(); i++)
+    {
+        Cost[i] = Graph[v0][i];
+    }
+    v=v0;
+    sum=0;
+    Visist[v] = true;
+    for (int j = 0; j < Graph.size()-1; j++)
+    {
+        min=INT32_MAX;
+        for (int m = 0; m < Cost.size(); m++)
+        {
+            if (Visist[m] == false && Cost[m] < min)
+            {
+                cout<<"Cost[m]:"<<Cost[m]<<"min:"<<min<<endl;
+                min = Cost[m];
+                v = m;
+            }    
+        }
+        Visist[v] = true;
+        sum+=min;
+        for (int n = 0; n < Cost.size(); n++)
+        {
+            if (Visist[n] == false && Graph[v][n] < Cost[n])
+            {
+                Cost[n] = Graph[v][n];
+            }     
+        }    
+    }
+    return sum;
+}
+#if 0
+    string Original{"caaaabd"};
+    string Pattern{"aaaab"};
+    vector<int> Preix(Pattern.size(),0);
+
+    PublicPrefix(Pattern, Preix );
+    vector<int> Next(Preix.size(),-1);
+    for (int i = 1; i < Preix.size(); i++)
+    {
+        Next[i] = Preix[i-1];
+    }
+    for(auto c:Next)
+    {
+        cout<<c<<endl;
+    }
+    cout<<"find:"<<KmpSearch(Original, Pattern, Next)<<endl;
+#endif

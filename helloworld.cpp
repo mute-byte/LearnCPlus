@@ -11,22 +11,12 @@ using namespace std;
 
 
 int main(){
-    string Original{"caaaabd"};
-    string Pattern{"aaaab"};
-    vector<int> Preix(Pattern.size(),0);
 
-    PublicPrefix(Pattern, Preix );
-    vector<int> Next(Preix.size(),-1);
-    for (int i = 1; i < Preix.size(); i++)
+    vector<int> test{5,4,6,2,1,2};
+    BubbleSort(test);
+    for (auto i : test)
     {
-        Next[i] = Preix[i-1];
+        cout<<i<<endl;
     }
-    for(auto c:Next)
-    {
-        cout<<c<<endl;
-    }
-    cout<<"find:"<<KmpSearch(Original, Pattern, Next)<<endl;
-
-
     return 0;
 }
