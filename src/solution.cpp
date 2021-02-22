@@ -246,17 +246,12 @@ void DirectInsertionSort(vector<int> &original)
     {
         int tem = original[i];
         int j = i;
-        for (; j > 0 ; j--)
+        while (j > 0 && tem < original[j-1])
         {
-            if (tem < original[j-1])
-            {
-                original[j] = original[j-1];
-            }
-            else
-            {
-                break;
-            }    
+            original[j] = original[j-1];
+            j--;
         }
+
         original[j] = tem;    
     }
     
@@ -297,6 +292,115 @@ void BubbleSort(vector<int>& original)
          
      }
      
+}
+void QuickSort(vector<int>& original, int low, int high)
+{
+    if (low >= high)
+    {
+       return;
+    }
+    
+    int i = low, j = high;
+    int tem = original[low];
+    while (i < j)
+    {
+       while (i< j && original[j] > tem)
+       {
+           j--;
+       }
+       if (i < j)
+       {
+           original[i] = original[j];
+           i++;
+       }
+       while (i < j && original[i] < tem)
+       {
+           i++;
+       }
+       if (i < j)
+       {
+           original[j] = original[i];
+           j--;
+       }   
+    }
+    original[i] = tem;
+    QuickSort(original, low, i - 1);
+    QuickSort(original, i + 1, high);
+    
+}
+void ShellSort(vector<int>& original)
+{
+    for (int gap = original.size()/2; gap > 0; gap/=2)
+    {
+        for (int i = gap; i < original.size(); i++)
+        {
+            int tem = original[i];
+            int j = i;
+            while (j >= gap && tem < original[j-gap])
+            {
+                original[j] = original[j-gap];
+                j-=gap;
+            }
+            original[j] = tem;    
+        }
+        
+    }
+    
+}
+void Merge(vector<int>& original, int low, int mid, int high)
+{
+    vector<int> Left;
+    vector<int> Right;
+    int il, ir, im;
+    for (il = low; il <= mid; il++)
+    {
+        Left.push_back(original[il]);
+    }
+    for (ir = mid+1; ir <= high; ir++)
+    {
+        Right.push_back(original[ir]);
+    }
+    im = low, ir = 0, il = 0;
+    while (il < Left.size() && ir < Right.size())
+    {
+        if (Left[il] < Right[ir])
+        {
+            original[im] = Left[il];
+            im++;
+            il++;
+        }
+        else
+        {
+            original[im] = Right[ir];
+            im ++;
+            ir ++;
+        }   
+    }
+    while (il < Left.size())
+    {
+        original[im] = Left[il];
+        im++;
+        il++;
+    }
+    while (ir < Right.size())
+    {
+        original[im] = Right[ir];
+        im++;
+        ir++;
+    }
+}
+void MergeSort(vector<int>& original, int low, int high)
+{
+    if (low < high)
+    {
+        int mid = (low + high)/2;
+//        cout<<low<<"***"<<mid<<endl;
+        MergeSort(original,low,mid);
+//        cout<<mid+1<<"$$$"<<high<<endl;
+        MergeSort(original,mid+1,high);
+        Merge(original,low,mid,high);
+    }
+//    cout<<"low:"<<low<<"   "<<"high:"<<high<<endl;
 }
 #if 0
     vector<int> test{5,4,6,2,1,2};

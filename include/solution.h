@@ -29,4 +29,8 @@ int KmpSearch(string& Original, string& Pattern, vector<int>& Next);
 void DirectInsertionSort(vector<int> &original);
 void SelectSort(vector<int> &original);
 void BubbleSort(vector<int>& original);
+void QuickSort(vector<int>& original, int low, int high);
+void ShellSort(vector<int>& original);
+void MergeSort(vector<int>& original, int low, int high);
+
 int Prim(vector<vector<int>>& Graph, int v0);
